@@ -1,0 +1,30 @@
+﻿@{
+    var db = Database.Open("Movies");
+    var selectedData = db.Query("SELECT * FROM Movies");
+    var grid = new WebGrid(source: selectedData);
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Movies</title>    
+</head>
+<body>
+ <h1>Movies</h1>
+    <div>
+        @grid.GetHtml(
+        tableStyle: "grid",
+        headerStyle: "head",
+        alternatingRowStyle: "alt",
+        columns: grid.Columns(
+        grid.Column("Title"),
+        grid.Column("Genre"),
+        grid.Column("Year")
+        )
+        )
+    </div>
+<p><a href="~/MoviePage.cshtml">Return to Movie Listing</a></p>
+</body>
+</html>
